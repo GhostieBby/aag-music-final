@@ -11,7 +11,7 @@ export default function UserProfile() {
   useEffect(() => {
     async function getUserData() {
       try {
-        const { data } = await axios.get(`/users/${id}`)
+        const { data } = await axios.get(`/api/users/${id}`)
         setUserProfile(data)
       } catch (error) {
         console.error(error)
