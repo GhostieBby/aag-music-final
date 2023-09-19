@@ -1,0 +1,102 @@
+import Song from '../models/song.js'
+import { checkId, NotFound, Unauthorized, sendErrors } from '../utils/errors.js'
+
+import User from '../models/user.js'
+
+// Add a song to the list of the user with the id at the endpoint
+export const addSong = async (req, res) => {
+  try {
+    const { id } = req.params
+    const recommendedTo = id
+    const recipient = await User.findById(id)
+
+    const regex = /tracks\/(\d+)&/
+    const match = regex.exec(req.body)
+
+    if (recipient.id == req.user._id) {
+      return res.status(403).json({ error: 'Cannot add song to own playlist' })
+    }
+    const recipientSongs = recipient.userSongs.map(song => {
+      return song.soundCloudId
+    })
+    const songDuplicationCheck = recipientSongs.some(song => {
+      return song === match[1]
+    })
+    if (songDuplicationCheck === true) {
+      return res.status(409).json({ error: 'Song already added to playlist' })
+    }
+    const songAdded = await Song.create({ ...req.body, soundCloudId: match[1], addedBy: req.user._id, recommendedTo, songAccepted: false })
+    return res.status(201).json(songAdded)
+  } catch (error) {
+    sendErrors(error, res)
+  }
+}
+
+
+
+
+
+
+// This fetches all the songs in the Users current list (accepted and not accepted)
+export const getPendingSongs = async (req, res) => {
+  try {
+    const { id } = req.params
+    const songs = await Song.find({ recommendedTo: id })
+    const pendingSongs = songs.filter(song => {
+      return song.songAccepted === false
+    })
+    return res.json(pendingSongs)
+  } catch (error) {
+    sendErrors(error, res)
+  }
+}
+
+
+export const getAllSongs = async (req, res) => {
+  const songs = await Song.find()
+  return res.json(songs)
+}
+
+export const acceptSong = async (req, res) => {
+  const { userId, songId } = req.params
+  const song = await Song.findById(songId)
+  Object.assign(song, req.body)
+  await song.save()
+  const user = await User.findById(userId)
+  // const recipientSongs = user.userSongs.map(song => {
+  //   return song.soundCloudId
+  // })
+  // const songDuplicationCheck = recipientSongs.some(song => {
+  //   return song === req.body.soundCloudId
+  // })
+  // if (songDuplicationCheck === true) {
+  //   return res.status(409).json({ error: 'Song already added to playlist' })
+  // }
+  user.userSongs.push(song)
+  await user.save()
+  updateLikes(song.addedBy)
+  return res.json(song)
+}
+
+export const updateLikes = async (addedBy) => {
+  const allSongs = await Song.find()
+  const user = await User.findById(addedBy)
+  console.log(user)
+  const recommendedSongs = allSongs.filter(song => {
+    if (song.addedBy.equals(addedBy) && song.songAccepted === true)
+      return song
+  })
+  user.likes = recommendedSongs.length
+  console.log(user)
+  await user.save()
+}
+
+export const getRecsByGivenUser = async (req, res) => {
+  const { id } = req.params
+  const allSongs = await Song.find()
+  const recommendedSongs = allSongs.filter(song => {
+    return song.addedBy == id && song.songAccepted === true
+  })
+
+  return res.json(recommendedSongs)
+}
