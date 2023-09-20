@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 
 import { getToken } from '../utils/auth'
+import ErrorModal from './ErrorModal'
 
 export default function RecommendSong() {
   const [targetUser, setTargetedUser] = useState(null)
   const { id } = useParams()
+  const [showErrorModal, setShowErrorModal] = useState(false)
 
   useEffect(() => {
     async function getUserData() {
@@ -42,11 +44,13 @@ export default function RecommendSong() {
       })
     } catch (error) {
       console.error(error)
+      setShowErrorModal(true)
     }
   }
 
   return (
     <>
+      {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}
       {targetUser && (
         <div>
           <h2>Recommend a Song to {targetUser.username}</h2>
