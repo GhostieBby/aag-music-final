@@ -6,7 +6,6 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 import Image from 'react-bootstrap/Image'
 
-import ErrorModal from './ErrorModal'
 
 export default function UserProfile() {
 
@@ -33,9 +32,7 @@ export default function UserProfile() {
     getUserData()
   }, [id])
 
-  function handleRecommendationButton(){
-
-  }
+  
 
   function handlePendingButton(){
 
@@ -68,7 +65,6 @@ export default function UserProfile() {
           )}
         </div>
       ) : null}
-      <button onClick={handlePendingButton}>Check pending songs</button>
       <Link to={`/songs/${userProfile._id}`}>Click here to recommend a song to {userProfile.username}</Link>
       <Link to={`/users/${userProfile._id}/songs`}>Check pending songs</Link>
     </>
