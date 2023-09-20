@@ -11,6 +11,7 @@ export default function UserProfile() {
   const navigate = useNavigate()
 
   const [userProfile, setUserProfile] = useState(null)
+  const [ selectedSongId, setSelectedSongId ] = useState(null)
 
   const { id } = useParams()
 
@@ -37,17 +38,22 @@ export default function UserProfile() {
         <div>
           <h1>{userProfile.username}</h1>
           <h2>Likes: {userProfile.likes}</h2>
-          {userProfile.userSongs.length > 0 && 
-            userProfile.userSongs.map(song => (
-              <iframe
-                key={song.soundCloudId} 
-                width="100%"
-                height="100"
-                allow="autoplay"
-                src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${song.soundCloudId}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}>
-              </iframe>
-            ))
-          }
+          <h3>{userProfile.username}&apos;s Songs</h3>
+          {userProfile.userSongs.map(song => (
+            <div key={song.soundCloudId}>
+              <button onClick={() => setSelectedSongId(song.soundCloudId)}>
+                {song.soundCloudId}
+              </button>
+            </div>
+          ))}
+          {selectedSongId && (
+            <iframe
+              width="100%"
+              height="300"  
+              allow="autoplay"
+              src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${selectedSongId}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}>
+            </iframe>
+          )}
         </div>
       ) : null}
     </>
