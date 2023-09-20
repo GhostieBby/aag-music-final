@@ -10,7 +10,9 @@ export default function UserProfile() {
 
   const navigate = useNavigate()
 
-  const [userProfile, setUserProfile] = useState(null)
+  const [userProfile, setUserProfile] = useState({
+    userSongs: [],
+  })
   const [ selectedSongId, setSelectedSongId ] = useState(null)
 
   const { id } = useParams()
@@ -32,6 +34,7 @@ export default function UserProfile() {
   }, [id])
 
   console.log('USER PROFILE', userProfile)
+  console.log('USER SONGS 0', userProfile.userSongs[0])
   return (
     <>
       {userProfile ? (

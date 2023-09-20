@@ -26,7 +26,7 @@ export const loginUser = async (req, res) => {
 
 export const getUserProfile = async (req, res) => {
   const { id } = req.params
-  const user = await User.findById(id)
+  const user = await User.findById(id).populate('userSongs.addedBy', 'username')
   return res.json(user)
 }
 
