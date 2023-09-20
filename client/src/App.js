@@ -10,6 +10,7 @@ import Register from './components/Register'
 import AcceptSong from './components/AcceptSong'
 import UserProfile from './components/UserProfile'
 import SearchUsers from './components/SearchUsers'
+import GetPendingSongs from './components/GetPendingSongs'
 
 export default function App() {
   useEffect(() => {
@@ -44,6 +45,7 @@ export default function App() {
           <Route path='/users' element={<SearchUsers />} />
           <Route path='/songs/:id' element={<RecommendSong />} />
           <Route path='/songs/:userId/:songId' element={<AcceptSong />} />
+          <Route path='users/:userId/songs' element={<GetPendingSongs />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>
