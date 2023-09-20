@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
 export default function UserProfile() {
 
+  const navigate = useNavigate()
+
   const [userProfile, setUserProfile] = useState(null)
 
   const { id } = useParams()
+
+  function handleClick () {
+    navigate('/users') // needs thinking
+  }
 
   useEffect(() => {
     async function getUserData() {
@@ -21,5 +27,10 @@ export default function UserProfile() {
   }, [id])
 
   console.log('USER PROFILE', userProfile)
-  return <h1>WELCOME TO USER PAGE</h1>
+  return (
+    <>
+      <h1>WELCOME TO USER PAGE</h1>
+    </>
+  )
+
 }
