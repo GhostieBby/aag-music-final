@@ -45,8 +45,9 @@ export default function UserProfile() {
           {userProfile.userSongs.map(song => (
             <div key={song.soundCloudId}>
               <button onClick={() => setSelectedSongId(song.soundCloudId)}>
-                Sent with love from {song.addedBy.username}
+                Click to hear a little song
               </button>
+              <Link to={`/users/${song.addedBy._id}`}>Sent with love from {song.addedBy.username}</Link>
             </div>
           ))}
           {selectedSongId && (
@@ -59,6 +60,7 @@ export default function UserProfile() {
           )}
         </div>
       ) : null}
+      <Link to={`/songs/${userProfile._id}`}>Click here to recommend a song to {userProfile.username}</Link>
     </>
   )
   

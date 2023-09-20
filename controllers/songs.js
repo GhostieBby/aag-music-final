@@ -66,7 +66,7 @@ export const acceptSong = async (req, res) => {
     if (!song) {
       return res.status(404).json({ error: 'Song not found' })
     }
-    await song.populate('addedBy', 'username')
+    await song
     Object.assign(song, req.body)
     await song.save()
     const user = await User.findById(userId)
