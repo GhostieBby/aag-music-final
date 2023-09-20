@@ -11,6 +11,10 @@ export default function GetPendingSongs() {
   const [targetedUser, setTargetedUser] = useState(null)
   const [selectedSongId, setSelectedSongId] = useState(null)
 
+  const [formData, setFormData] = useState({
+    songAccepted: '',
+  })
+
   useEffect(() => {
     async function getTargetedUserData() {
       try {
@@ -39,6 +43,32 @@ export default function GetPendingSongs() {
     getPendingSongsData()
   }, [])
 
+  const acceptRecommendation = async (songId) => {
+    try {
+      const updatedData = { ...formData, songAccepted: true }
+      await axios.put(`/api/songs/${userId}/${songId}`, updatedData, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async function declineRecommendation(songId) {
+    try {
+      const updatedData = { ...formData, songAccepted: false }
+      await axios.put(`/api/songs/${userId}/${songId}`, updatedData, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   return (
     <>
       {targetedUser ? (
@@ -53,8 +83,8 @@ export default function GetPendingSongs() {
                       Click to hear a little song
                     </button>
                     <Link to={`/users/${song.addedBy._id}`}>Sent with love from {song.addedBy.username}</Link>
-                    <button>Accept</button>
-                    <button>Decline</button>
+                    <button onClick={() => acceptRecommendation(song._id)}>Accept</button>
+                    <button onClick={() => declineRecommendation(song._id)}>Decline</button>
                   </div>
                 )
               })}
