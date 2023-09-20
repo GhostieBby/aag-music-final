@@ -26,28 +26,15 @@ export default function App() {
 
   return (
     <>
-      <Nav />
-      <h1>hello</h1>
-      <main>
-        <div>
-          {/* <iframe
-            width="100%"
-            height="100"
-            allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1527325330&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-          </iframe>
-           */}
-        </div>
-        <Routes>
-          <Route path='/register' element={<Register />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/users/:id' element={<UserProfile />} />
-          <Route path='/users' element={<SearchUsers />} />
-          <Route path='/songs/:id' element={<RecommendSong />} />
-          <Route path='/songs/:userId/:songId' element={<AcceptSong />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </main>
+      <Routes>
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/users/:id' element={<UserProfile />} />
+        <Route path='/users' element={<SearchUsers />} />
+        <Route path='/songs/:id' element={<RecommendSong />} />
+        <Route path='/songs/:userId/:songId' element={<AcceptSong />} />
+        <Route path='*' element={<NotFound />} />
+      </Routes>
     </>
   )
 }
