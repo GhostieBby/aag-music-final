@@ -27,7 +27,6 @@ export default function App() {
   return (
     <>
       <Nav />
-      <h1>hello</h1>
       <main>
         <div>
           {/* <iframe
