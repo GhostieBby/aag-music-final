@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
+import { Container, Row, Col } from 'react-bootstrap'
+
+import Image from 'react-bootstrap/Image'
+
 export default function UserProfile() {
 
   const navigate = useNavigate()
@@ -10,7 +14,7 @@ export default function UserProfile() {
 
   const { id } = useParams()
 
-  function handleClick () {
+  function handleClick() {
     navigate('/users') // needs thinking
   }
 
@@ -29,8 +33,21 @@ export default function UserProfile() {
   console.log('USER PROFILE', userProfile)
   return (
     <>
-      <h1>WELCOME TO USER PAGE</h1>
+      {userProfile ? (
+        <div>
+          <h1>{userProfile.username}</h1>
+          <h2>Likes: {userProfile.likes}</h2>
+          {userProfile.userSongs.length > 0 && (
+            <Container>
+              <Row>
+                {userProfile.userSongs.map(song => (
+                  <Col key={song.soundCloudId}>{song.soundCloudId}</Col>
+                ))}
+              </Row>
+            </Container>
+          )}
+        </div>
+      ) : null}
     </>
   )
-
 }
