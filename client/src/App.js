@@ -4,7 +4,7 @@ import axios from 'axios'
 
 import RecommendSong from './components/RecommendSong'
 import Login from './components/Login'
-import Nav from './components/Nav'
+import NavBar from './components/Nav'
 import NotFound from './components/NotFound'
 import Register from './components/Register'
 import AcceptSong from './components/AcceptSong'
@@ -26,7 +26,7 @@ export default function App() {
 
   return (
     <>
-      <Nav />
+      <NavBar />
       <main>
         <div>
           {/* <iframe
