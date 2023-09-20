@@ -25,8 +25,10 @@ router.route('/users')
   .get(getAllUsers)
 
 router.route('/songs/:id')
-  .get(secureRoute, getPendingSongs)
   .post(secureRoute, addSong)
+
+router.route('/users/:id/songs')
+.get(secureRoute, getPendingSongs)
 
 router.route('/songs/:userId/:songId')
   .put(secureRoute, acceptSong)
@@ -43,8 +45,8 @@ router.route('/reviews/:id')
 router.route('/users/:userId/reviews/:reviewId')
   .delete(secureRoute, deleteReview)
 
-  router.route('/users/:id')
-    .get(getUserProfile)
-    .put(secureRoute, updateProfile)
+router.route('/users/:id')
+  .get(getUserProfile)
+  .put(secureRoute, updateProfile)
 
 export default router

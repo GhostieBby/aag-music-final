@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+
 import { useParams } from 'react-router-dom'
 import Button from 'react-bootstrap/Button'
 
 
 export default function AcceptSong() {
-  const { userId } = useParams() // get the user's id from the route params
+
+  const { userId, songId } = useParams()
+  const [ pendingSongs, setPendingSongs ] = useState([])
   const [song, setSong] = useState(null) //init song as null
   const [accepted, setAccepted] = useState(false) // track whether song is accepted
+
   useEffect(() => {
     async function getSong() {
       try {
