@@ -61,6 +61,7 @@ export default function UserProfile() {
         </div>
       ) : null}
       <Link to={`/songs/${userProfile._id}`}>Click here to recommend a song to {userProfile.username}</Link>
+      <Link to={`/users/${userProfile._id}/songs`}>Check pending songs</Link>
     </>
   )
   
