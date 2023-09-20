@@ -17,9 +17,7 @@ export default function UserProfile() {
 
   const { id } = useParams()
 
-  function handleClick() {
-    navigate('/users') // needs thinking
-  }
+ 
 
   useEffect(() => {
     async function getUserData() {
