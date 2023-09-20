@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
+import { Container, Row, Col } from 'react-bootstrap'
+
+import Image from 'react-bootstrap/Image'
+
 export default function UserProfile() {
 
   const navigate = useNavigate()
@@ -13,7 +17,7 @@ export default function UserProfile() {
 
   const { id } = useParams()
 
- 
+
 
   useEffect(() => {
     async function getUserData() {
