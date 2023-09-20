@@ -11,7 +11,7 @@ export const addSong = async (req, res) => {
     const recipient = await User.findById(id)
 
     const regex = /tracks\/(\d+)&/
-    const match = regex.exec(req.body)
+    const match = regex.exec(req.body.soundCloudId)
 
     if (recipient.id == req.user._id) {
       return res.status(403).json({ error: 'Cannot add song to own playlist' })

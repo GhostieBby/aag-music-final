@@ -2,10 +2,10 @@ import { Container, Nav, Navbar } from 'react-bootstrap'
 
 export default function NavBar() {
   return (
-    <NavBar>
+    <Navbar>
       <Container>
         
       </Container>
-    </NavBar>
+    </Navbar>
   )
 }
