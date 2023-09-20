@@ -25,7 +25,7 @@ export const addSong = async (req, res) => {
     if (songDuplicationCheck === true) {
       return res.status(409).json({ error: 'Song already added to playlist' })
     }
-    const songAdded = await Song.create({ ...req.body, soundCloudId: match[1], addedBy: req.user._id, recommendedTo, songAccepted: false })
+    const songAdded = await Song.create({ ...req.body, soundCloudId: match[1], addedBy: req.user._id, recommendedTo, songAccepted: undefined })
     const populatedSong = await Song.findById(songAdded._id).populate('addedBy', 'username').exec()
     console.log('POPULATED SONG', populatedSong)
     return res.status(201).json({populatedSong})
@@ -45,7 +45,7 @@ export const getPendingSongs = async (req, res) => {
     const { id } = req.params
     const songs = await Song.find({ recommendedTo: id }).populate('addedBy', 'username').exec()
     const pendingSongs = songs.filter(song => {
-      return song.songAccepted === false
+      return song.songAccepted === undefined
     })
     return res.json(pendingSongs)
   } catch (error) {
