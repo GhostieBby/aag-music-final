@@ -42,7 +42,7 @@ export default function UserProfile() {
           {userProfile.userSongs.map(song => (
             <div key={song.soundCloudId}>
               <button onClick={() => setSelectedSongId(song.soundCloudId)}>
-                {song.soundCloudId}
+                Sent with love from {song.addedBy.username}
               </button>
             </div>
           ))}
