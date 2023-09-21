@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
-
 import { getToken } from '../utils/auth'
-
 import ErrorModal from './ErrorModal'
 
 export default function GetPendingSongs() {
@@ -57,6 +55,8 @@ export default function GetPendingSongs() {
           Authorization: `Bearer ${getToken()}`,
         },
       })
+
+      setPendingSongs((songs) => songs.filter((song) => song._id !== songId))
     } catch (error) {
       console.error(error)
       setShowErrorModal(true)
@@ -71,6 +71,9 @@ export default function GetPendingSongs() {
           Authorization: `Bearer ${getToken()}`,
         },
       })
+
+      // Remove the declined song from the view
+      setPendingSongs((prevSongs) => prevSongs.filter((song) => song._id !== songId))
     } catch (error) {
       console.error(error)
       setShowErrorModal(true)
@@ -84,9 +87,9 @@ export default function GetPendingSongs() {
         targetedUser ? (
           <>
             <h1>Pending Songs for {targetedUser.username}</h1>
-            {pendingSongs.length > 0 ?
+            {pendingSongs.length > 0 ? (
               <div>
-                {pendingSongs.map(song => {
+                {pendingSongs.map((song) => {
                   return (
                     <div key={song.soundCloudId}>
                       <button onClick={() => setSelectedSongId(song.soundCloudId)}>
@@ -107,15 +110,14 @@ export default function GetPendingSongs() {
                   </iframe>
                 )}
               </div>
-              : <p>No songs pending</p>
-            }
+            ) : (
+              <p>No songs pending</p>
+            )}
           </>
         ) : null
       ) : (
         <p>Permission denied</p>
       )}
     </>
-
-
   )
 }
