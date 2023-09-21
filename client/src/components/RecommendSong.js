@@ -14,7 +14,11 @@ export default function RecommendSong() {
   useEffect(() => {
     async function getUserData() {
       try {
-        const { data } = await axios.get(`/api/users/${id}`)
+        const { data } = await axios.get(`/api/users/${id}`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
         setTargetedUser(data)
       } catch (error) {
         console.error(error)

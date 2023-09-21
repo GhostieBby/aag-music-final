@@ -20,7 +20,11 @@ export default function GetPendingSongs() {
   useEffect(() => {
     async function getTargetedUserData() {
       try {
-        const { data } = await axios.get(`/api/users/${userId}`)
+        const { data } = await axios.get(`/api/users/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
         setTargetedUser(data)
       } catch (error) {
         console.error(error)

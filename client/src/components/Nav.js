@@ -36,7 +36,7 @@ export default function NavBar() {
             <Nav.Link href={`/users/${userID}`}>Profile Page</Nav.Link>
             <Nav.Link href="/search">Search Users</Nav.Link>
           </Nav>
-          <Form inline>
+          <Form>
             <FormControl type="text" placeholder="Search Users" className="mr-sm-2" value={searchInput} onChange={handleSearchInputChange} />
             <Button variant="outline-primary" onClick={handleSearch}>Search</Button>
           </Form>

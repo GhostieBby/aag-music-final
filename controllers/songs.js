@@ -106,29 +106,6 @@ export const deleteSong = async (req, res) => {
   }
 }
 
-
-// export const acceptSong = async (req, res) => {
-//   const { userId, songId } = req.params
-//   const song = await Song.findById(songId)
-//   Object.assign(song, req.body)
-//   await song.save()
-//   song = await song.populate('addedBy', 'username').execPopulate()
-//   const user = await User.findById(userId)
-//   // const recipientSongs = user.userSongs.map(song => {
-//   //   return song.soundCloudId
-//   // })
-//   // const songDuplicationCheck = recipientSongs.some(song => {
-//   //   return song === req.body.soundCloudId
-//   // })
-//   // if (songDuplicationCheck === true) {
-//   //   return res.status(409).json({ error: 'Song already added to playlist' })
-//   // }
-//   user.userSongs.push(song)
-//   await user.save()
-//   updateLikes(song.addedBy)
-//   return res.json(song)
-// }
-
 export const updateLikes = async (addedBy) => {
   const allSongs = await Song.find()
   const user = await User.findById(addedBy)
