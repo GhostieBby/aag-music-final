@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 export default function SearchUsers() {
 
@@ -71,11 +72,11 @@ export default function SearchUsers() {
       </div>
 
       <input onKeyUp={handleKeyup}/>
-      <section className='country-grid'>
+      <section>
         {users && users.map(user => {
           return (
             <div key={user._id} value={user._id}>
-              <h2>{user.username}</h2>
+              <Link to={`/users/${user._id}`}>{user.username}</Link>
               <p>Likes: {user.likes}</p>
             </div>
           )
