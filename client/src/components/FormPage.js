@@ -3,6 +3,7 @@ import { Form, Button, Navbar, Container, Nav, Jumbotron, Row, Col } from 'react
 import { Link } from 'react-router-dom'
 
 export default function FormPage({ onFormSubmit, isLogin }) {
+  const [username, setUsername] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -39,6 +40,17 @@ export default function FormPage({ onFormSubmit, isLogin }) {
       </div>
       <div className='entry'>
         <Form onSubmit={handleSubmit}>
+          {!isLogin && (
+            <Form.Group controlId="username">
+              <Form.Control
+                type="username"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
+            </Form.Group>
+          )}
           <Form.Group controlId="email">
             <Form.Control
               type="email"
