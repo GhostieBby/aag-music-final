@@ -66,7 +66,9 @@ export const acceptSong = async (req, res) => {
     if (!song) {
       return res.status(404).json({ error: 'Song not found' })
     }
-    await song
+    if (req.user._id.toString() !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' })
+    }
     Object.assign(song, req.body)
     await song.save()
     const user = await User.findById(userId)
@@ -80,29 +82,29 @@ export const acceptSong = async (req, res) => {
   }
 }
 
-
-
-// export const acceptSong = async (req, res) => {
-//   const { userId, songId } = req.params
-//   const song = await Song.findById(songId)
-//   Object.assign(song, req.body)
-//   await song.save()
-//   song = await song.populate('addedBy', 'username').execPopulate()
-//   const user = await User.findById(userId)
-//   // const recipientSongs = user.userSongs.map(song => {
-//   //   return song.soundCloudId
-//   // })
-//   // const songDuplicationCheck = recipientSongs.some(song => {
-//   //   return song === req.body.soundCloudId
-//   // })
-//   // if (songDuplicationCheck === true) {
-//   //   return res.status(409).json({ error: 'Song already added to playlist' })
-//   // }
-//   user.userSongs.push(song)
-//   await user.save()
-//   updateLikes(song.addedBy)
-//   return res.json(song)
-// }
+export const deleteSong = async (req, res) => {
+  try {
+    const { userId, songId } = req.params
+    let song = await Song.findById(songId)
+    if (!song) {
+      return res.status(404).json({ error: 'Song not found' })
+    }
+    if (req.user._id.toString() !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' })
+    }
+    const user = await User.findById(userId)
+    user.userSongs.splice(user.userSongs.indexOf(song), 1)
+    await user.save()
+    const songDeleted = await Song.findByIdAndDelete(songId)
+    if (!songDeleted) {
+      return res.status(404).json({ error: 'Song not found' })
+    }
+    updateLikes(song.addedBy)
+    return res.sendStatus(204)
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 export const updateLikes = async (addedBy) => {
   const allSongs = await Song.find()

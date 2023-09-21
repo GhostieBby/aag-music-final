@@ -1,7 +1,7 @@
 import express from 'express'
 import { registerUser, loginUser, getAllUsers, getUserProfile, updateProfile } from '../controllers/users.js'
 import { secureRoute } from './secureRoute.js'
-import { acceptSong, addSong, getAllSongs, getRecsByGivenUser, getPendingSongs } from '../controllers/songs.js'
+import { acceptSong, addSong, getAllSongs, getRecsByGivenUser, getPendingSongs, deleteSong } from '../controllers/songs.js'
 import { addReview, deleteReview } from '../controllers/reviews.js'
 
 // The router is an object that we'll attach routes to
@@ -32,6 +32,7 @@ router.route('/users/:id/songs')
 
 router.route('/songs/:userId/:songId')
   .put(secureRoute, acceptSong)
+  .delete(secureRoute, deleteSong)
 
 router.route('/songs')
   .get(getAllSongs)
@@ -46,7 +47,7 @@ router.route('/users/:userId/reviews/:reviewId')
   .delete(secureRoute, deleteReview)
 
 router.route('/users/:id')
-  .get(getUserProfile)
+  .get(secureRoute, getUserProfile)
   .put(secureRoute, updateProfile)
 
 export default router

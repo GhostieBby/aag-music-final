@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import { getToken } from '../utils/auth'
@@ -9,11 +9,16 @@ export default function RecommendSong() {
   const [targetUser, setTargetedUser] = useState(null)
   const { id } = useParams()
   const [showErrorModal, setShowErrorModal] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getUserData() {
       try {
-        const { data } = await axios.get(`/api/users/${id}`)
+        const { data } = await axios.get(`/api/users/${id}`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
         setTargetedUser(data)
       } catch (error) {
         console.error(error)
@@ -42,6 +47,7 @@ export default function RecommendSong() {
       setFormData({
         soundCloudId: '',
       })
+      navigate(`/users/${id}`)
     } catch (error) {
       console.error(error)
       setShowErrorModal(true)

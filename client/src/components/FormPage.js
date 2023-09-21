@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { setToken, getToken } from '../utils/auth'
 import { stateValues, fieldValues } from '../utils/common'
 
+import ErrorModal from './ErrorModal'
+
 
 export default function FormPage({ title, request, fields, redirect, onLoad }) {
 
@@ -12,6 +14,7 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
 
   const [formData, setFormData] = useState(stateValues(fields))
   const [errors, setErrors] = useState('')
+  const [showErrorModal, setShowErrorModal] = useState(false)
 
   useEffect(() => {
     async function fillFormFields() {
@@ -50,19 +53,23 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
 
         if (title === 'Login') {
           navigate(`/users/${userID}`)
-        } else {
-          navigate(redirect)
         }
-  
+
+        if (title === 'Register') {
+          navigate('/login')
+        }
+
       }
     } catch (error) {
       const errorMessage = error.response.data.message
       console.error(errorMessage)
       setErrors(errorMessage)
+      setShowErrorModal(true)
     }
   }
 
   return (
+<<<<<<< HEAD
     <div>
       <header>
         <Navbar bg="light" expand="lg">
@@ -83,6 +90,37 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
                 <h1>AAG Music</h1>
                 <h3>Where artists help each other get heard.</h3>
               </div>
+=======
+    <section className="form-col">
+      {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}
+      <div className="entry">
+        <div className="text">
+          <h1>AAG Music</h1>
+          <h3>Where artists help each other get heard.</h3>
+        </div>
+      </div>
+      <Container>
+        <Row>
+          {fields.length > 0 ?
+            <Col as="form" onSubmit={handleSubmit} className="form-col">
+              {fieldValues(fields).map(field => {
+                const { type, name, variable } = field
+                return (
+                  <Fragment key={variable}>
+                    <label hidden htmlFor={variable}>{name}</label>
+                    <input
+                      type={type}
+                      name={variable}
+                      placeholder={name}
+                      value={formData[variable]}
+                      onChange={handleChange}
+                    />
+                  </Fragment>
+                )
+              })}
+              {errors && <p>{errors}</p>}
+              {<button type="submit">{title}</button>}
+>>>>>>> feature-anthony
             </Col>
           </Row>
         </Container>
