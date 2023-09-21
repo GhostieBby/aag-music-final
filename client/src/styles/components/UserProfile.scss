@@ -1,5 +1,7 @@
-.profile-pic {
-  width: 500px;
-  height:auto;
-}
 
+
+.user-profile{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
