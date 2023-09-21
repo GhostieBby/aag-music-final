@@ -4,11 +4,6 @@ import axios from 'axios'
 
 import { getToken } from '../utils/auth'
 
-import { Container, Row, Col } from 'react-bootstrap'
-
-import Image from 'react-bootstrap/Image'
-
-
 export default function UserProfile() {
 
   const navigate = useNavigate()
@@ -19,7 +14,7 @@ export default function UserProfile() {
   const [selectedSongId, setSelectedSongId] = useState(null)
 
   const { id } = useParams()
-
+  
 
 
   useEffect(() => {
@@ -37,6 +32,11 @@ export default function UserProfile() {
     }
     getUserData()
   }, [id])
+
+  const token = getToken()
+  if (!token) return false
+  const payload = JSON.parse(window.atob(token.split('.')[1]))
+  const userID = payload.sub
 
   async function deleteSong(userId, songId) {
     try {
@@ -68,7 +68,7 @@ export default function UserProfile() {
           <div className='user-profile'>
             <h1>{userProfile.username}</h1>
             <h2>Likes: {userProfile.likes}</h2>
-            <h3>{userProfile.username}&apos;s Songs</h3>
+            <h3>{userProfile.username}&apos;s Chosen Songs</h3>
             {userProfile.userSongs.map(song => (
               <div key={song.soundCloudId}>
                 <button onClick={() => setSelectedSongId(song.soundCloudId)}>
@@ -92,7 +92,6 @@ export default function UserProfile() {
         ) : null}
         <div className='user-profile'>
           <Link to={`/songs/${userProfile._id}`}>Click here to recommend a song to {userProfile.username}</Link>
-          <Link to={`/users/${userProfile._id}/songs`}>Check pending songs</Link>
         </div>
       </div>
     </>

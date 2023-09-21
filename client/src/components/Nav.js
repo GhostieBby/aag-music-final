@@ -35,6 +35,7 @@ export default function NavBar() {
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href={`/users/${userID}`}>Profile Page</Nav.Link>
             <Nav.Link href="/search">Search Users</Nav.Link>
+            <Nav.Link href={`/users/${userID}/songs`}>Check pending songs</Nav.Link>
           </Nav>
           
         </Navbar.Collapse>
