@@ -1,14 +1,31 @@
-import React from 'react'
 import FormPage from './FormPage'
+import axios from 'axios'
 
-export default function RegisterPage() {
-  const handleRegisterSubmit = (formData) => {
-    console.log('Register submitted with data:', formData)
+export default function Register() {
+  const fields = [
+    {
+      type: 'text',
+      name: 'Username',
+    },
+    {
+      type: 'email',
+      name: 'Email',
+    },
+    {
+      type: 'password',
+      name: 'Password',
+    },
+    {
+      type: 'password',
+      name: 'Password Confirmation',
+    }
+  ]
+
+  function register(formData){
+    return axios.post('/api/register', formData)
   }
 
   return (
-    <div>
-      <FormPage onFormSubmit={handleRegisterSubmit} isLogin={false} />
-    </div>
+    <FormPage title="Register" request={register} fields={fields} redirect="/login" />
   )
 }

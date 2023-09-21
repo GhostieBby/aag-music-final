@@ -1,15 +1,24 @@
-import React from 'react'
+import { redirect } from 'react-router-dom'
 import FormPage from './FormPage'
-import '../styles/components/FormPage.scss'
+import axios from 'axios'
 
 export default function Login() {
-  const handleLoginSubmit = (formData) => {
-    console.log('Login submitted with data:', formData)
+  const fields = [
+    {
+      type: 'email',
+      name: 'Email',
+    },
+    {
+      type: 'password',
+      name: 'Password',
+    }
+  ]
+
+  function login(formData) {
+    return axios.post('/api/login', formData)
   }
 
   return (
-    <div>
-      <FormPage onFormSubmit={handleLoginSubmit} isLogin={true} />
-    </div>
+    <FormPage title="Login" request={login} fields={fields} redirect="/users/:id" />
   )
 }

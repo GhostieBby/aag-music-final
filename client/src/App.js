@@ -28,15 +28,6 @@ export default function App() {
 
   return (
     <>
-      <Routes>
-        <Route path='/register' element={<Register />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/users/:id' element={<UserProfile />} />
-        <Route path='/users' element={<SearchUsers />} />
-        <Route path='/songs/:id' element={<RecommendSong />} />
-        <Route path='/songs/:userId/:songId' element={<AcceptSong />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
       <NavBar />
       <main>
         <div>
