@@ -82,6 +82,29 @@ export const acceptSong = async (req, res) => {
   }
 }
 
+export const deleteSong = async (req, res) => {
+  try {
+    const { userId, songId } = req.params
+    let song = await Song.findById(songId)
+    if (!song) {
+      return res.status(404).json({ error: 'Song not found' })
+    }
+    if (req.user._id.toString() !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' })
+    }
+    const user = await User.findById(userId)
+    user.userSongs.splice(user.userSongs.indexOf(song), 1)
+    await user.save()
+    const songDeleted = await Song.findByIdAndDelete(songId)
+    if (!songDeleted) {
+      return res.status(404).json({ error: 'Song not found' })
+    }
+    updateLikes(song.addedBy)
+    return res.sendStatus(204)
+  } catch (error) {
+    console.error(error)
+  }
+}
 
 
 // export const acceptSong = async (req, res) => {
