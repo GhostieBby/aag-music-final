@@ -41,7 +41,13 @@ export default function UserProfile() {
           Authorization: `Bearer ${getToken()}`,
         },
       })
-      navigate(`/users/${userId}`)
+      const remainingSongs = userProfile.userSongs.filter((song) => {
+        return song._id !== songId
+      })
+      setUserProfile({
+        ...userProfile,
+        userSongs: remainingSongs,
+      })
     } catch (error) {
       console.log(error)
     }

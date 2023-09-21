@@ -71,8 +71,6 @@ export default function GetPendingSongs() {
           Authorization: `Bearer ${getToken()}`,
         },
       })
-
-      // Remove the declined song from the view
       setPendingSongs((prevSongs) => prevSongs.filter((song) => song._id !== songId))
     } catch (error) {
       console.error(error)
