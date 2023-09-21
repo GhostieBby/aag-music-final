@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
+import { getToken } from '../utils/auth'
+
 import { Container, Row, Col } from 'react-bootstrap'
 
 import Image from 'react-bootstrap/Image'
@@ -32,11 +34,20 @@ export default function UserProfile() {
     getUserData()
   }, [id])
 
-  
-
-  function handlePendingButton(){
-
+  async function deleteSong(userId, songId) {
+    try {
+      await axios.delete(`/api/songs/${userId}/${songId}`, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      navigate(`/users/${userId}`)
+    } catch (error) {
+      console.log(error)
+    }
   }
+
+  
 
   console.log('USER PROFILE', userProfile)
   console.log('USER SONGS 0', userProfile.userSongs[0])
@@ -53,6 +64,9 @@ export default function UserProfile() {
                 Click to hear a little song
               </button>
               <Link to={`/users/${song.addedBy._id}`}>Sent with love from {song.addedBy.username}</Link>
+              <button onClick={() => deleteSong(userProfile._id, song._id)}>
+                Delete Song
+              </button>
             </div>
           ))}
           {selectedSongId && (
