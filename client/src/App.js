@@ -28,7 +28,6 @@ export default function App() {
 
   return (
     <>
-<<<<<<< HEAD
       <Routes>
         <Route path='/register' element={<Register />} />
         <Route path='/login' element={<Login />} />
@@ -38,7 +37,6 @@ export default function App() {
         <Route path='/songs/:userId/:songId' element={<AcceptSong />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
-=======
       <NavBar />
       <main>
         <div>
@@ -63,7 +61,6 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
->>>>>>> feature-anthony
     </>
   )
 }

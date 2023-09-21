@@ -8,10 +8,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 import Image from 'react-bootstrap/Image'
 
-<<<<<<< HEAD
-=======
 
->>>>>>> feature-anthony
 export default function UserProfile() {
 
   const navigate = useNavigate()
@@ -41,11 +38,6 @@ export default function UserProfile() {
     getUserData()
   }, [id])
 
-<<<<<<< HEAD
-  console.log('USER PROFILE', userProfile)
-  return <h1>WELCOME TO USER PAGE</h1>
-}
-=======
   async function deleteSong(userId, songId) {
     try {
       await axios.delete(`/api/songs/${userId}/${songId}`, {
@@ -103,4 +95,3 @@ export default function UserProfile() {
   )
   
 }
->>>>>>> feature-anthony
