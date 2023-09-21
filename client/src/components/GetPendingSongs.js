@@ -73,6 +73,7 @@ export default function GetPendingSongs() {
       })
     } catch (error) {
       console.error(error)
+      setShowErrorModal(true)
     }
   }
 

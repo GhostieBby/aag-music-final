@@ -53,9 +53,11 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
 
         if (title === 'Login') {
           navigate(`/users/${userID}`)
-        } else {
-          navigate(redirect)
-        }
+        } 
+
+        if (title === 'Register') {
+          navigate('/login')
+        } 
   
       }
     } catch (error) {
