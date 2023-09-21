@@ -1,18 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, onFormSubmit } from 'react'
 import { Form, Button, Navbar, Container, Nav, Jumbotron, Row, Col } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import { setToken, getToken } from '../utils/auth'
-import { stateValues, fieldValues } from '../utils/common'
+import { stateValues } from '../utils/common'
 
 
-export default function FormPage({ title, request, fields, redirect, onLoad }) {
-
+export default function FormPage({ title, request, fields, redirect, onLoad, isLogin }) {
+  // ! location var
   const navigate = useNavigate()
 
+  // ! states (all 50 of 'em)
   const [formData, setFormData] = useState(stateValues(fields))
   const [errors, setErrors] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
+  // ! on component render
   useEffect(() => {
     async function fillFormFields() {
       try {
@@ -24,11 +29,12 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
       }
     }
     if (onLoad) {
+      console.log('on load executed')
       fillFormFields()
     }
   }, [onLoad])
 
-  async function handleChange(event) {
+  function handleChange(event) {
     setFormData({ ...formData, [event.target.name]: event.target.value })
     setErrors('')
   }
@@ -41,7 +47,6 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
         setToken(data.token)
       }
       if (redirect) {
-
         const token = getToken()
         if (!token) return false
         const payload = JSON.parse(window.atob(token.split('.')[1]))
@@ -56,7 +61,7 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
   
       }
     } catch (error) {
-      const errorMessage = error.response.data.message
+      const errorMessage = error.response.data.message || 'missing fields'
       console.error(errorMessage)
       setErrors(errorMessage)
     }
@@ -65,15 +70,7 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
   return (
     <div>
       <header>
-        <Navbar bg="light" expand="lg">
-          <Container>
-            <Nav className="mr-auto">
-              <Nav.Link href="login">Login</Nav.Link>
-              <Nav.Link href="users">Users</Nav.Link>
-              <Nav.Link href="reviews">Reviews</Nav.Link>
-            </Nav>
-          </Container>
-        </Navbar>
+        
       </header>
       <div className="entry">
         <Container>
