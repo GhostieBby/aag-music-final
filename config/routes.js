@@ -47,7 +47,7 @@ router.route('/users/:userId/reviews/:reviewId')
   .delete(secureRoute, deleteReview)
 
 router.route('/users/:id')
-  .get(getUserProfile)
+  .get(secureRoute, getUserProfile)
   .put(secureRoute, updateProfile)
 
 export default router

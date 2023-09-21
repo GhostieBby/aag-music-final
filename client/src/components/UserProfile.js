@@ -25,7 +25,11 @@ export default function UserProfile() {
   useEffect(() => {
     async function getUserData() {
       try {
-        const { data } = await axios.get(`/api/users/${id}`)
+        const { data } = await axios.get(`/api/users/${id}`, {
+          headers: {
+            Authorization: `Bearer ${getToken()}`,
+          },
+        })
         setUserProfile(data)
       } catch (error) {
         console.error(error)
