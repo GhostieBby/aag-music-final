@@ -25,7 +25,7 @@ export default function NavBar() {
     // add the search logic here
   }
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="lg" className="nav-bar">
       <Container>
         <Navbar.Brand href="/">AAG Music</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -36,10 +36,7 @@ export default function NavBar() {
             <Nav.Link href={`/users/${userID}`}>Profile Page</Nav.Link>
             <Nav.Link href="/search">Search Users</Nav.Link>
           </Nav>
-          <Form>
-            <FormControl type="text" placeholder="Search Users" className="mr-sm-2" value={searchInput} onChange={handleSearchInputChange} />
-            <Button variant="outline-primary" onClick={handleSearch}>Search</Button>
-          </Form>
+          
         </Navbar.Collapse>
       </Container>
     </Navbar>

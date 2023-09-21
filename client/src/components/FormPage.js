@@ -53,12 +53,12 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
 
         if (title === 'Login') {
           navigate(`/users/${userID}`)
-        } 
+        }
 
         if (title === 'Register') {
           navigate('/login')
-        } 
-  
+        }
+
       }
     } catch (error) {
       const errorMessage = error.response.data.message
@@ -69,13 +69,18 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
   }
 
   return (
-    <section>
+    <section className="form-col">
       {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}
-      <h1>{title}</h1>
+      <div className="entry">
+        <div className="text">
+          <h1>AAG Music</h1>
+          <h3>Where artists help each other get heard.</h3>
+        </div>
+      </div>
       <Container>
         <Row>
           {fields.length > 0 ?
-            <Col as="form" onSubmit={handleSubmit}>
+            <Col as="form" onSubmit={handleSubmit} className="form-col">
               {fieldValues(fields).map(field => {
                 const { type, name, variable } = field
                 return (

@@ -11,6 +11,7 @@ import AcceptSong from './components/AcceptSong'
 import UserProfile from './components/UserProfile'
 import SearchUsers from './components/SearchUsers'
 import GetPendingSongs from './components/GetPendingSongs'
+import Footer from './components/Footer'
 
 export default function App() {
   useEffect(() => {
@@ -50,6 +51,7 @@ export default function App() {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>
+      <Footer />
     </>
   )
 }
