@@ -46,6 +46,7 @@ export default function App() {
           <Route path='/songs/:id' element={<RecommendSong />} />
           <Route path='/songs/:userId/:songId' element={<AcceptSong />} />
           <Route path='users/:userId/songs' element={<GetPendingSongs />} />
+          <Route path='/search' element={<SearchUsers />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </main>

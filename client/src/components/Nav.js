@@ -34,6 +34,7 @@ export default function NavBar() {
             <Nav.Link href="/register">Register</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
             <Nav.Link href={`/users/${userID}`}>Profile Page</Nav.Link>
+            <Nav.Link href="/search">Search Users</Nav.Link>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search Users" className="mr-sm-2" value={searchInput} onChange={handleSearchInputChange} />
