@@ -66,7 +66,9 @@ export const acceptSong = async (req, res) => {
     if (!song) {
       return res.status(404).json({ error: 'Song not found' })
     }
-    await song
+    if (req.user._id.toString() !== userId) {
+      return res.status(403).json({ error: 'Unauthorized' })
+    }
     Object.assign(song, req.body)
     await song.save()
     const user = await User.findById(userId)
