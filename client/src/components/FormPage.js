@@ -5,12 +5,15 @@ import { Form, Container, Nav, Navbar, Row, Col, Button } from 'react-bootstrap'
 import { setToken, getToken } from '../utils/auth'
 import { stateValues, fieldValues } from '../utils/common'
 
+import ErrorModal from './ErrorModal'
+
 
 export default function FormPage({ title, request, fields, redirect, onLoad }) {
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState(stateValues(fields))
   const [errors, setErrors] = useState('')
+  const [showErrorModal, setShowErrorModal] = useState(false)
 
   useEffect(() => {
     async function fillFormFields() {
@@ -59,11 +62,13 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
       const errorMessage = error.response.data.message
       console.error(errorMessage)
       setErrors(errorMessage)
+      setShowErrorModal(true)
     }
   }
 
   return (
     <section>
+      {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}
       <h1>{title}</h1>
       <Container>
         <Row>
