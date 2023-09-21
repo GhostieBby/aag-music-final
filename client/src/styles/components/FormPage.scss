@@ -1,5 +1,5 @@
 body {
-  display: flex;
+  display: block;
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(to bottom, #ff5733, #ff7933, #ff9e33, #ffbf33, #ffd833, #fff133, #fffe33);
@@ -12,7 +12,8 @@ body {
   text-align: center; 
   display: flex;
   flex-direction: column;
-  width: 30rem;
+  width: auto;
+  margin-left: 23px;
 }
 
 .text{
@@ -65,6 +66,7 @@ footer{
 
 
 .nav-link {
+
   list-style-type: none;
   text-align: center;
   background-color: rgba(51, 51, 51, 0.8);
@@ -98,13 +100,14 @@ input{
 button{
   margin-top: 20px;
   box-shadow: 2px 2px 0 0 white, 4px 4px 0 0 black;
-  height: 25px;
+  height: auto;
   border-radius: 5px;
   background: linear-gradient(to top, rgba(249, 1, 1, 0.9), rgba(161, 2, 2, 0.9));
   color:white;
   font-family: Flamenco;
   font-size: large;
   margin-right: 15px;
+  text-align: center;
 }
 
 button:hover {
@@ -115,7 +118,12 @@ button:hover {
   box-shadow: 2px 2px 0 0 white, 4px 4px 0 0 black;
 }
 
-li:hover {
+a.nav-link {
+  color: black;
+  margin-top: 23px;
+}
+
+a.nav-link:hover {
   cursor: pointer;
   letter-spacing: 0.25em;
   transition: 0.3s;
@@ -125,4 +133,17 @@ li:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+main {
+  height: 40vh;
+}
+
+.form-fields{
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  border-radius: 5px;
+  height: auto;
 }

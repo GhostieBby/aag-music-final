@@ -71,19 +71,19 @@ export default function UserProfile() {
             <h3>{userProfile.username}&apos;s Chosen Songs</h3>
             {userProfile.userSongs.map(song => (
               <div key={song.soundCloudId}>
-                <button onClick={() => setSelectedSongId(song.soundCloudId)}>
+                <button className='pending-button' onClick={() => setSelectedSongId(song.soundCloudId)}>
                   Click to hear a little song
                 </button>
                 <Link to={`/users/${song.addedBy._id}`}>Sent with love from {song.addedBy.username}</Link>
-                <button onClick={() => deleteSong(userProfile._id, song._id)}>
+                <button className='pending-button' onClick={() => deleteSong(userProfile._id, song._id)}>
                   Delete Song
                 </button>
               </div>
             ))}
             {selectedSongId && (
               <iframe
-                width="100%"
-                height="300"
+                width="60%"
+                height="150"
                 allow="autoplay"
                 src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${selectedSongId}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}>
               </iframe>

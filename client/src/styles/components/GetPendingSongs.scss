@@ -1,0 +1,24 @@
+.pending-title{
+  display: flex;
+  justify-content: center;
+}
+
+.pending-body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+}
+
+.pending-button{
+  border-radius: 5px;
+  margin-right: 10px;
+  margin-left: 5px;
+  margin-bottom: 10px;
+}
+
+p{
+  display: flex;
+  justify-content: center;
+}

@@ -58,21 +58,11 @@ export default function SearchUsers() {
   }
   return (
     <div>
-      <h1>Search Users</h1>
-      <div>
-        <label>
-          Search by:
-          <select value={searchBy} onChange={handleSearchByChange}>
-            <option value="username">Username</option>
-            <option value="userId">User ID</option>
-          </select>
-        </label>
-        <input type="text" placeholder={`Search by ${searchBy}`} value={searchInput} onChange={handleSearchInputChange} />
-        <button onClick={handleSearch}>Search</button>
+      <div className='search-header'>
+        <h1>Search Users</h1>
+        <input onKeyUp={handleKeyup} placeholder='Search name' />
       </div>
-
-      <input onKeyUp={handleKeyup}/>
-      <section>
+      <section className='user-section'>
         {users && users.map(user => {
           return (
             <div key={user._id} value={user._id}>

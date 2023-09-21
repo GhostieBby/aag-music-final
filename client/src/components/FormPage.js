@@ -84,7 +84,7 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
               {fieldValues(fields).map(field => {
                 const { type, name, variable } = field
                 return (
-                  <Fragment key={variable}>
+                  <div key={variable} className='form-fields'>
                     <label hidden htmlFor={variable}>{name}</label>
                     <input
                       type={type}
@@ -93,11 +93,11 @@ export default function FormPage({ title, request, fields, redirect, onLoad }) {
                       value={formData[variable]}
                       onChange={handleChange}
                     />
-                  </Fragment>
+                  </div>
                 )
               })}
               {errors && <p>{errors}</p>}
-              {<button type="submit">{title}</button>}
+              {<button className='submit-button' type="submit">{title}</button>}
             </Col>
             :
             'Form Error'
