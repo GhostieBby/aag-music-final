@@ -2,7 +2,7 @@ body {
   display: block;
   justify-content: center;
   align-items: center;
-  background-image: linear-gradient(to bottom, #ff5733, #ff7933, #ff9e33, #ffbf33, #ffd833, #fff133, #fffe33);
+  background-image: linear-gradient(to bottom, #ff5733, #ff7933, #ff9e33, #ffbf33, #ffd833, #ffbf33);
   height: 100vh;
   margin: 0;
   padding: 0;
@@ -146,4 +146,8 @@ main {
 .submit-button {
   border-radius: 5px;
   height: auto;
+}
+
+a {
+  color: black
 }

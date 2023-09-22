@@ -68,13 +68,13 @@ export default function UserProfile() {
           <div className='user-profile'>
             <h1>{userProfile.username}</h1>
             <h2>Likes: {userProfile.likes}</h2>
-            <h3>{userProfile.username}&apos;s Chosen Songs</h3>
+            <h3>Chosen by {userProfile.username}:</h3>
             {userProfile.userSongs.map(song => (
               <div key={song.soundCloudId}>
                 <button className='pending-button' onClick={() => setSelectedSongId(song.soundCloudId)}>
                   Click to hear a little song
                 </button>
-                <Link to={`/users/${song.addedBy._id}`}>Sent with love from {song.addedBy.username}</Link>
+                <span>Sent with love from: <Link to={`/users/${song.addedBy._id}`} className="black-link">{song.addedBy.username}</Link></span>
                 <button className='pending-button' onClick={() => deleteSong(userProfile._id, song._id)}>
                   Delete Song
                 </button>
@@ -91,7 +91,7 @@ export default function UserProfile() {
           </div>
         ) : null}
         <div className='user-profile'>
-          <Link to={`/songs/${userProfile._id}`}>Click here to recommend a song to {userProfile.username}</Link>
+          <span>Click <Link to={`/songs/${userProfile._id}`}>here</Link> to recommend a song to this user</span>
         </div>
       </div>
     </>

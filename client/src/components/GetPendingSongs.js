@@ -100,7 +100,7 @@ export default function GetPendingSongs() {
                         <button className='pending-button' onClick={() => setSelectedSongId(song.soundCloudId)}>
                           Click to hear a little song
                         </button>
-                        <Link to={`/users/${song.addedBy._id}`}>Sent with love from {song.addedBy.username}</Link>
+                        <span>Sent with love from: <Link to={`/users/${song.addedBy._id}`} className="black-link">{song.addedBy.username}</Link></span>
                         <button className='pending-button' onClick={() => acceptRecommendation(song._id)}>Accept</button>
                         <button className='pending-button' onClick={() => declineRecommendation(song._id)}>Decline</button>
                       </div>
