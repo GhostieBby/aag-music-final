@@ -47,7 +47,15 @@ export const getPendingSongs = async (req, res) => {
     const pendingSongs = songs.filter(song => {
       return song.songAccepted === undefined
     })
-    return res.json(pendingSongs)
+    const removePendingSongs = new Set()
+    const uniquePendingSongs = songs.filter((song) => {
+      if (!removePendingSongs.has(song.soundCloudId)){
+        removePendingSongs.add(song.soundCloudId)
+        return true
+      }
+      return false
+    })
+    return res.json(uniquePendingSongs)
   } catch (error) {
     sendErrors(error, res)
   }
