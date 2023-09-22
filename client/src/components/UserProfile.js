@@ -59,35 +59,37 @@ export default function UserProfile() {
   return (
     <>
       {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}
-      <div className='user-page'>
-        {userProfile ? (
+      <div className='user-wrapper'>
+        <div className='user-page'>
+          {userProfile ? (
+            <div className='user-profile'>
+              <h1>{userProfile.username}</h1>
+              <h2>Likes: {userProfile.likes}</h2>
+              <h3>Chosen by {userProfile.username}:</h3>
+              {userProfile.userSongs.map(song => (
+                <div key={song.soundCloudId}>
+                  <button className='pending-button' onClick={() => setSelectedSongId(song.soundCloudId)}>
+                    Click to hear a little song
+                  </button>
+                  <span>Sent with love from: <Link to={`/users/${song.addedBy._id}`} className="black-link">{song.addedBy.username}</Link></span>
+                  <button className='pending-button' onClick={() => deleteSong(userProfile._id, song._id)}>
+                    Delete Song
+                  </button>
+                </div>
+              ))}
+              {selectedSongId && (
+                <iframe
+                  width="60%"
+                  height="150"
+                  allow="autoplay"
+                  src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${selectedSongId}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}>
+                </iframe>
+              )}
+            </div>
+          ) : null}
           <div className='user-profile'>
-            <h1>{userProfile.username}</h1>
-            <h2>Likes: {userProfile.likes}</h2>
-            <h3>Chosen by {userProfile.username}:</h3>
-            {userProfile.userSongs.map(song => (
-              <div key={song.soundCloudId}>
-                <button className='pending-button' onClick={() => setSelectedSongId(song.soundCloudId)}>
-                  Click to hear a little song
-                </button>
-                <span>Sent with love from: <Link to={`/users/${song.addedBy._id}`} className="black-link">{song.addedBy.username}</Link></span>
-                <button className='pending-button' onClick={() => deleteSong(userProfile._id, song._id)}>
-                  Delete Song
-                </button>
-              </div>
-            ))}
-            {selectedSongId && (
-              <iframe
-                width="60%"
-                height="150"
-                allow="autoplay"
-                src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${selectedSongId}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}>
-              </iframe>
-            )}
+            <span>Click <Link to={`/songs/${userProfile._id}`}>here</Link> to recommend a song to {userProfile.username}</span>
           </div>
-        ) : null}
-        <div className='user-profile'>
-          <span>Click <Link to={`/songs/${userProfile._id}`}>here</Link> to recommend a song to {userProfile.username}</span>
         </div>
       </div>
     </>

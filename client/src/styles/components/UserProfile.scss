@@ -13,3 +13,17 @@ h1, h3{
 a {
   color: black
 }
+
+.user-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.user-page{
+  background-color: rgba(51, 51, 51, 0.1);
+  border-radius: 5px;
+  width: fit-content;
+  padding: 15px;
+  box-shadow: 0 0 30px yellow, 4px 4px 0 0 rgb(117, 161, 23);
+  margin-top: 20px;
+}

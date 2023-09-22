@@ -88,36 +88,40 @@ export default function GetPendingSongs() {
       {validateToken ? (
         targetedUser ? (
           <>
-            <div className='pending-title'>
-              <h1>Pending Songs for {targetedUser.username}</h1>
-            </div>
-            <div className='pending-body'>
-              {pendingSongs.length > 0 ? (
-                <div>
-                  {pendingSongs.map((song) => {
-                    return (
-                      <div key={song.soundCloudId}>
-                        <button className='pending-button' onClick={() => setSelectedSongId(song.soundCloudId)}>
-                          Click to hear a little song
-                        </button>
-                        <span>Sent with love from: <Link to={`/users/${song.addedBy._id}`} className="black-link">{song.addedBy.username}</Link></span>
-                        <button className='pending-button' onClick={() => acceptRecommendation(song._id)}>Accept</button>
-                        <button className='pending-button' onClick={() => declineRecommendation(song._id)}>Decline</button>
-                      </div>
-                    )
-                  })}
-                  {selectedSongId && (
-                    <iframe
-                      width="100%"
-                      height="150"
-                      allow="autoplay"
-                      src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${selectedSongId}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}>
-                    </iframe>
+            <div className='user-wrapper'>
+              <div className='user-page'>
+                <div className='pending-title'>
+                  <h1>Pending Songs for {targetedUser.username}</h1>
+                </div>
+                <div className='pending-body'>
+                  {pendingSongs.length > 0 ? (
+                    <div>
+                      {pendingSongs.map((song) => {
+                        return (
+                          <div key={song.soundCloudId}>
+                            <button className='pending-button' onClick={() => setSelectedSongId(song.soundCloudId)}>
+                              Click to hear a little song
+                            </button>
+                            <span>Sent with love from: <Link to={`/users/${song.addedBy._id}`} className="black-link">{song.addedBy.username}</Link></span>
+                            <button className='pending-button' onClick={() => acceptRecommendation(song._id)}>Accept</button>
+                            <button className='pending-button' onClick={() => declineRecommendation(song._id)}>Decline</button>
+                          </div>
+                        )
+                      })}
+                      {selectedSongId && (
+                        <iframe
+                          width="100%"
+                          height="150"
+                          allow="autoplay"
+                          src={`https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${selectedSongId}&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true`}>
+                        </iframe>
+                      )}
+                    </div>
+                  ) : (
+                    <p>No songs pending</p>
                   )}
                 </div>
-              ) : (
-                <p>No songs pending</p>
-              )}
+              </div>
             </div>
           </>
         ) : null
