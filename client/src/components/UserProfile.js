@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
+import ErrorModal from './ErrorModal'
 
 import { getToken } from '../utils/auth'
 
@@ -12,9 +13,10 @@ export default function UserProfile() {
     userSongs: [],
   })
   const [selectedSongId, setSelectedSongId] = useState(null)
+  const [showErrorModal, setShowErrorModal] = useState(false)
 
   const { id } = useParams()
-  
+
 
 
   useEffect(() => {
@@ -54,6 +56,7 @@ export default function UserProfile() {
       })
     } catch (error) {
       console.log(error)
+      setShowErrorModal(true)
     }
   }
 
@@ -63,6 +66,7 @@ export default function UserProfile() {
   console.log('USER SONGS 0', userProfile.userSongs[0])
   return (
     <>
+      {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}
       <div className='user-page'>
         {userProfile ? (
           <div className='user-profile'>
