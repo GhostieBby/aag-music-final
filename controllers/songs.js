@@ -9,10 +9,8 @@ export const addSong = async (req, res) => {
     const { id } = req.params
     const recommendedTo = id
     const recipient = await User.findById(id)
-
     const regex = /tracks\/(\d+)&/
     const match = regex.exec(req.body.soundCloudId)
-
     if (recipient.id == req.user._id) {
       return res.status(403).json({ error: 'Cannot add song to own playlist' })
     }
@@ -33,11 +31,6 @@ export const addSong = async (req, res) => {
     sendErrors(error, res)
   }
 }
-
-
-
-
-
 
 // This fetches all the songs in the Users current list (accepted and not accepted)
 export const getPendingSongs = async (req, res) => {
@@ -60,7 +53,6 @@ export const getPendingSongs = async (req, res) => {
     sendErrors(error, res)
   }
 }
-
 
 export const getAllSongs = async (req, res) => {
   const songs = await Song.find()

@@ -14,31 +14,10 @@ import GetPendingSongs from './components/GetPendingSongs'
 import Footer from './components/Footer'
 
 export default function App() {
-  useEffect(() => {
-    async function getData() {
-      try {
-        const { data } = await axios.get('/users') // <---- Replace with your endpoint to test the proxy
-        console.log(data)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-    getData()
-  }, [])
-
   return (
     <>
       <NavBar />
       <main>
-        <div>
-          {/* <iframe
-            width="100%"
-            height="100"
-            allow="autoplay"
-            src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1527325330&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true">
-          </iframe>
-           */}
-        </div>
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/register' element={<Register />} />

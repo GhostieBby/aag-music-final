@@ -13,10 +13,7 @@ export default function UserProfile() {
   })
   const [selectedSongId, setSelectedSongId] = useState(null)
   const [showErrorModal, setShowErrorModal] = useState(false)
-
   const { id } = useParams()
-
-
 
   useEffect(() => {
     async function getUserData() {
@@ -59,10 +56,6 @@ export default function UserProfile() {
     }
   }
 
-
-
-  console.log('USER PROFILE', userProfile)
-  console.log('USER SONGS 0', userProfile.userSongs[0])
   return (
     <>
       {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}

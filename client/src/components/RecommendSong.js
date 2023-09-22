@@ -72,7 +72,6 @@ export default function RecommendSong() {
                 onChange={handleInputChange}
                 placeholder="Go to Soundcloud, click the Share button paste the Embed link here"
               />
-
             </div>
             <button type="submit" className="btn btn-primary">Recommend</button>
           </form>
