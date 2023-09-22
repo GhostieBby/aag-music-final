@@ -70,6 +70,7 @@ export default function RecommendSong() {
                 name="soundCloudId"
                 value={formData.soundCloudId}
                 onChange={handleInputChange}
+                placeholder="Click the Share button under the song in Soundcloud and copy the Embed link"
               />
 
             </div>
