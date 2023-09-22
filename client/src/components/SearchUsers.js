@@ -13,14 +13,7 @@ export default function SearchUsers() {
       try {
         const { data } = await axios.get('/api/users')
         data.sort(function (a, b) {
-          if (a.likes > b.likes) {
-            return 1
-          }
-          if (a.likes < b.likes) {
-            return -1
-          } else {
-            return 0
-          }
+          return b.likes - a.likes
         })
         setAllUsers(data)
         setUsers(data)
