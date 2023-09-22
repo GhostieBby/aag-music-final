@@ -80,7 +80,9 @@ export const acceptSong = async (req, res) => {
     Object.assign(song, req.body)
     await song.save()
     const user = await User.findById(userId)
-    user.userSongs.push(song)
+    if (song.songAccepted === true) {
+      user.userSongs.push(song)
+    }
     await user.save()
     updateLikes(song.addedBy)
     return res.json(song)
