@@ -151,3 +151,14 @@ main {
 a {
   color: black
 }
+
+a.navbar-brand{
+  height: auto;
+  width: auto;
+  rotate: 0deg;
+  transition: rotate 3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+a.navbar-brand:hover {
+  rotate: -720deg;
+}
