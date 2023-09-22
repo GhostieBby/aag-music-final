@@ -58,7 +58,7 @@ export default function RecommendSong() {
     <>
       {showErrorModal && <ErrorModal show={showErrorModal} onClose={() => setShowErrorModal(false)} />}
       {targetUser && (
-        <div>
+        <div className="recommend-div">
           <h2>Recommend a Song to {targetUser.username}</h2>
           <form onSubmit={recommendSong}>
             <div className="mb-3">
