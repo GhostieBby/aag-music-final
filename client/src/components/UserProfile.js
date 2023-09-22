@@ -91,7 +91,7 @@ export default function UserProfile() {
           </div>
         ) : null}
         <div className='user-profile'>
-          <span>Click <Link to={`/songs/${userProfile._id}`}>here</Link> to recommend a song to this user</span>
+          <span>Click <Link to={`/songs/${userProfile._id}`}>here</Link> to recommend a song to {userProfile.username}</span>
         </div>
       </div>
     </>
