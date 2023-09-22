@@ -8,7 +8,6 @@ import { getToken } from '../utils/auth'
 export default function UserProfile() {
 
   const navigate = useNavigate()
-
   const [userProfile, setUserProfile] = useState({
     userSongs: [],
   })
