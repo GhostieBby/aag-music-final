@@ -8,6 +8,10 @@ AAG (which is an acronym made from the first initial of each coder) means “fir
 
 The idea was that, eventually, a more sophisticated version of the app could be developed whereby users (ideally musicians with their own Soundcloud profiles) would sign up through their Soundcloud account. In this version, users would display a link to their own Soundcloud page, but would only be allowed to share music by other Aag Music users. The “like” system would incentivise users to help promote other musicians, because, by promoting others, they would increase their number of “likes”, making their own page more visible, and, in turn, making it more likely for people to click on a link to their Soundcloud page. However, such an idea is currently too ambitious.
 
+## Languages and Tools Used
+
+JavaScript, Mongoose, Express, React, Node.js, CSS, Sass, Bootstrap, Insomnia, Heroku, Figma, VS Code
+
 ## Planning
 
 There were two strands of discussion which gave rise to the concept of Aag Music. First was the idea of hosting a platform for users to share their love of music by curating a playlist on their user profile page. The twist we introduced was that, in Aag Music, that curated list is made up entirely of suggestions by other users (although the user whose page it is gets the final say in which songs are accepted and which are not). 
