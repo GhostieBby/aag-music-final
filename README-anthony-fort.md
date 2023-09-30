@@ -595,7 +595,7 @@ In addition to the code described above, I was also responsible for:
 
 ## Learning Takeaways and Challenges
 
-In my opinion, we made a mistake in the early stages of this project, which had a significant impact on how the rest of the project unfolded. Initially, we had agreed to code the backend, with each team member working on a particular segment. However, we did not set up the routes.js file (the file that specifies the backend endpoints) before splitting up to work on our separate functions.
+In my opinion, we made a mistake in the early stages of this project, which had a significant impact on how the rest of the project unfolded. Initially, we had agreed to code the backend first, with each team member working on a particular segment. However, we did not set up the routes.js file (the file that specifies the backend endpoints) before splitting up to work on our separate functions.
 
 In order to test my code (in Insomnia) while I was writing it, I made a separate project folder, similar to the main one, but including a marked-up routes file. It was in this environment that I wrote and tested my code, and additionally ended up writing code for functions that had not been assigned to me. In the end, I had produced a simple but functional backend. When the group reconvened, we struggled to make a working backend that incorporated code from all three group members, and, in the end, opted to fully adopt the backend I had written alone, which we pushed into a new repository, “aag-music-final.”
 
