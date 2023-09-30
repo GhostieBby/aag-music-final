@@ -25,8 +25,7 @@ export const addSong = async (req, res) => {
     }
     const songAdded = await Song.create({ ...req.body, soundCloudId: match[1], addedBy: req.user._id, recommendedTo, songAccepted: undefined })
     const populatedSong = await Song.findById(songAdded._id).populate('addedBy', 'username').exec()
-    console.log('POPULATED SONG', populatedSong)
-    return res.status(201).json({populatedSong})
+    return res.status(201).json({ populatedSong })
   } catch (error) {
     sendErrors(error, res)
   }
@@ -37,22 +36,16 @@ export const getPendingSongs = async (req, res) => {
   try {
     const { id } = req.params
     const songs = await Song.find({ recommendedTo: id }).populate('addedBy', 'username').exec()
-    const pendingSongs = songs.filter(song => {
-      return song.songAccepted === undefined
-    })
     const removePendingSongs = new Set()
     const uniquePendingSongs = songs.filter((song) => {
-      if (!removePendingSongs.has(song.soundCloudId)){
-        removePendingSongs.add(song.soundCloudId)
-        return true
-      }
-      return false
+      return song.songAccepted === undefined && !removePendingSongs.has(song.soundCloudId) && removePendingSongs.add(song.soundCloudId)
     })
     return res.json(uniquePendingSongs)
   } catch (error) {
     sendErrors(error, res)
   }
 }
+
 
 export const getAllSongs = async (req, res) => {
   const songs = await Song.find()
