@@ -8,6 +8,8 @@ AAG (which is an acronym made from the first initial of each coder) means “fir
 
 The idea was that, eventually, a more sophisticated version of the app could be developed whereby users (ideally musicians with their own Soundcloud profiles) would sign up through their Soundcloud account. In this version, users would display a link to their own Soundcloud page, but would only be allowed to share music by other Aag Music users. The “like” system would incentivise users to help promote other musicians, because, by promoting others, they would increase their number of “likes”, making their own page more visible, and, in turn, making it more likely for people to click on a link to their Soundcloud page. However, such an idea is currently too ambitious.
 
+Visit the app [here](https://aag-music-final-772143c93aa4.herokuapp.com/).
+
 ## Languages and Tools Used
 
 JavaScript, Mongoose, Express, React, Node.js, CSS, Sass, Bootstrap, Insomnia, Heroku, Figma, VS Code
